@@ -21,3 +21,41 @@ if (form) form.addEventListener('submit', event => {
   const body = encodeURIComponent(`Name: ${data.get('name')}\nEmail: ${data.get('email')}\nInterest: ${data.get('interest')}\n\nMessage:\n${data.get('message') || ''}`);
   window.location.href = `mailto:hello@example.org?subject=${subject}&body=${body}`;
 });
+
+/* Temporary Google Reviews prompt — change GOOGLE_REVIEW_URL as needed */
+const GOOGLE_REVIEW_URL = 'https://search.google.com/local/writereview?placeid=ChIJTw-cW0iR7TkRhWbYlYGm--w';
+const REVIEW_PROMPT_KEY = 'bf_google_review_prompt_shown';
+
+(function showGoogleReviewPrompt() {
+  try {
+    if (localStorage.getItem(REVIEW_PROMPT_KEY)) return;
+  } catch (e) {
+    return;
+  }
+
+  window.setTimeout(() => {
+    try {
+      localStorage.setItem(REVIEW_PROMPT_KEY, '1');
+    } catch (e) {
+      /* still show once this session if storage is blocked */
+    }
+
+    const toast = document.createElement('div');
+    toast.className = 'review-prompt';
+    toast.setAttribute('role', 'status');
+    toast.innerHTML =
+      '<p class="review-prompt-text">Support Our Mission ❤️ Rate us on Google.</p>' +
+      '<a class="review-prompt-link" href="' + GOOGLE_REVIEW_URL + '" target="_blank" rel="noopener noreferrer">Rate on Google</a>' +
+      '<button type="button" class="review-prompt-close" aria-label="Close">×</button>';
+
+    const removeToast = () => {
+      toast.classList.add('is-hiding');
+      window.setTimeout(() => toast.remove(), 220);
+    };
+
+    toast.querySelector('.review-prompt-close').addEventListener('click', removeToast);
+    document.body.appendChild(toast);
+    window.requestAnimationFrame(() => toast.classList.add('is-visible'));
+    window.setTimeout(removeToast, 5000);
+  }, 2000);
+})();
