@@ -22,10 +22,58 @@ if (form) form.addEventListener('submit', event => {
   window.location.href = `mailto:hello@example.org?subject=${subject}&body=${body}`;
 });
 
-/* One-time on-site rating prompt */
+/* On-site rating: dedicated page panel + one-time popup elsewhere */
 const REVIEW_PROMPT_KEY = 'bf_google_review_prompt_shown';
 
+function bindStarRating(options) {
+  const starsWrap = options.starsWrap;
+  const submitBtn = options.submitBtn;
+  const message = options.message;
+  const actions = options.actions;
+  let selectedRating = 0;
+
+  starsWrap.innerHTML = '';
+  for (let i = 1; i <= 5; i += 1) {
+    const star = document.createElement('button');
+    star.type = 'button';
+    star.className = 'review-prompt-star';
+    star.setAttribute('aria-label', i + ' star' + (i === 1 ? '' : 's'));
+    star.dataset.value = String(i);
+    star.textContent = '★';
+    star.addEventListener('click', () => {
+      selectedRating = i;
+      starsWrap.querySelectorAll('.review-prompt-star').forEach((el) => {
+        const value = Number(el.dataset.value);
+        el.classList.toggle('is-selected', value <= selectedRating);
+      });
+      submitBtn.disabled = false;
+    });
+    starsWrap.appendChild(star);
+  }
+
+  submitBtn.addEventListener('click', () => {
+    if (!selectedRating) return;
+    message.textContent = 'Thank you for your rating.';
+    starsWrap.remove();
+    if (actions) actions.remove();
+    else submitBtn.remove();
+    if (typeof options.onComplete === 'function') options.onComplete();
+  });
+}
+
+(function initInlineRating() {
+  const panel = document.querySelector('[data-inline-rating]');
+  if (!panel) return;
+  const starsWrap = panel.querySelector('[data-inline-stars]');
+  const submitBtn = panel.querySelector('[data-inline-submit]');
+  const message = panel.querySelector('.rating-panel-text');
+  if (!starsWrap || !submitBtn || !message) return;
+  bindStarRating({ starsWrap, submitBtn, message, actions: panel.querySelector('.rating-panel-actions') });
+  try { localStorage.setItem(REVIEW_PROMPT_KEY, '1'); } catch (e) { /* ignore */ }
+})();
+
 (function showRatingPrompt() {
+  if (document.querySelector('[data-inline-rating]')) return;
   try {
     if (localStorage.getItem(REVIEW_PROMPT_KEY)) return;
   } catch (e) {
@@ -37,8 +85,6 @@ const REVIEW_PROMPT_KEY = 'bf_google_review_prompt_shown';
   } catch (e) {
     /* still show once this session if storage is blocked */
   }
-
-  let selectedRating = 0;
 
   const toast = document.createElement('div');
   toast.className = 'review-prompt';
@@ -58,39 +104,21 @@ const REVIEW_PROMPT_KEY = 'bf_google_review_prompt_shown';
   const message = toast.querySelector('.review-prompt-text');
   const actions = toast.querySelector('.review-prompt-actions');
 
-  for (let i = 1; i <= 5; i += 1) {
-    const star = document.createElement('button');
-    star.type = 'button';
-    star.className = 'review-prompt-star';
-    star.setAttribute('aria-label', i + ' star' + (i === 1 ? '' : 's'));
-    star.dataset.value = String(i);
-    star.textContent = '★';
-    star.addEventListener('click', () => {
-      selectedRating = i;
-      starsWrap.querySelectorAll('.review-prompt-star').forEach((el) => {
-        const value = Number(el.dataset.value);
-        el.classList.toggle('is-selected', value <= selectedRating);
-      });
-      submitBtn.disabled = false;
-    });
-    starsWrap.appendChild(star);
-  }
-
   const removeToast = () => {
     toast.classList.add('is-hiding');
     window.setTimeout(() => toast.remove(), 220);
   };
 
-  toast.querySelector('.review-prompt-close').addEventListener('click', removeToast);
-  toast.querySelector('.review-prompt-skip').addEventListener('click', removeToast);
-  submitBtn.addEventListener('click', () => {
-    if (!selectedRating) return;
-    message.textContent = 'Thank you for your rating.';
-    starsWrap.remove();
-    actions.remove();
-    window.setTimeout(removeToast, 1600);
+  bindStarRating({
+    starsWrap,
+    submitBtn,
+    message,
+    actions,
+    onComplete: () => window.setTimeout(removeToast, 1600)
   });
 
+  toast.querySelector('.review-prompt-close').addEventListener('click', removeToast);
+  toast.querySelector('.review-prompt-skip').addEventListener('click', removeToast);
   document.body.appendChild(toast);
   window.requestAnimationFrame(() => toast.classList.add('is-visible'));
 })();

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Rate Bright Futures Foundation and view the EduFree Google Business Profile rating and review options." />
+  <meta name="theme-color" content="#0b1f3a" />
+  <meta name="google-maps-api-key" content="" />
+  <meta property="og:title" content="Ratings & Reviews | Bright Futures Foundation" />
+  <meta property="og:description" content="Share your experience and find EduFree on Google Maps." />
+  <meta property="og:type" content="website" />
+  <title>Ratings & Reviews | Bright Futures Foundation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="topline"><div class="container topline-inner"><span>Free education. Real opportunity.</span><span class="topline-right">Supporting underprivileged children through learning</span></div></div>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="index.html" aria-label="Bright Futures Foundation home"><span class="brand-mark">bf<span>+</span></span><span class="brand-name">Bright Futures <small>FOUNDATION</small></span></a>
+      <button class="menu-toggle" aria-label="Open navigation" aria-expanded="false">☰</button>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="about.html#programs">Programs</a>
+        <a class="active" href="rating.html">Ratings</a>
+        <a href="about.html#contact">Contact</a>
+        <a class="nav-cta" href="about.html#get-involved">Get involved</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="page-hero">
+      <div class="container page-hero-inner">
+        <p class="eyebrow"><span class="eyebrow-dot"></span> Ratings & reviews</p>
+        <h1>Share your experience. <em>Support our mission.</em></h1>
+        <p>Rate your experience with Bright Futures Foundation, then visit our EduFree Google Business Profile to leave a public Google review if you wish.</p>
+        <div class="breadcrumb"><a href="index.html">Home</a><span>/</span><span>Ratings</span></div>
+      </div>
+    </section>
+
+    <section class="rating-page-section section-pad" id="site-rating">
+      <div class="container rating-page-grid">
+        <div>
+          <p class="eyebrow">On this website</p>
+          <h2>Please rate your experience with our <em>foundation.</em></h2>
+          <p>Choose a star rating below. Your response stays on this website and helps us understand how visitors feel about our work.</p>
+        </div>
+        <div class="rating-panel" data-inline-rating>
+          <p class="rating-panel-text">Please rate your experience with our foundation.</p>
+          <div class="review-prompt-stars" role="group" aria-label="Star rating" data-inline-stars></div>
+          <div class="rating-panel-actions">
+            <button type="button" class="btn btn-primary" data-inline-submit disabled>Submit Rating</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="google-place-section section-pad" id="google-reviews" data-google-place>
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Google Business Profile</p>
+            <h2>EduFree on <em>Google Maps.</em></h2>
+          </div>
+          <p>Live rating details load from Google when available. We never invent stars or review counts.</p>
+        </div>
+        <div class="google-place-card">
+          <div class="google-place-summary">
+            <p class="google-place-name" data-place-name>EduFree</p>
+            <div class="google-place-rating" data-place-rating hidden>
+              <span class="google-place-score" data-place-score></span>
+              <span class="google-place-stars" data-place-stars aria-hidden="true"></span>
+              <span class="google-place-count" data-place-count></span>
+            </div>
+            <p class="google-place-status" data-place-status>Loading live Google rating…</p>
+            <div class="google-place-actions">
+              <a class="btn btn-primary" data-write-review href="https://search.google.com/local/writereview?placeid=ChIJTw-cW0iR7TkRhWbYlYGm--w" target="_blank" rel="noopener noreferrer">Write a Review</a>
+              <a class="text-link" data-maps-link href="https://www.google.com/maps/search/?api=1&query_place_id=ChIJTw-cW0iR7TkRhWbYlYGm--w" target="_blank" rel="noopener noreferrer">Open in Google Maps <span>→</span></a>
+            </div>
+          </div>
+          <div class="google-place-map">
+            <iframe title="EduFree on Google Maps" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen data-google-map src="https://www.google.com/maps?q=place_id:ChIJTw-cW0iR7TkRhWbYlYGm--w&z=15&output=embed"></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="container footer-main">
+      <a class="brand brand-footer" href="index.html"><span class="brand-mark">bf<span>+</span></span><span class="brand-name">Bright Futures <small>FOUNDATION</small></span></a>
+      <p>Working toward free education and lasting opportunity for underprivileged children.</p>
+      <div class="footer-nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="rating.html">Ratings</a>
+        <a href="about.html#contact">Contact</a>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <span>© <span data-year></span> Bright Futures Foundation. All rights reserved.</span>
+      <span>Learning today. Leading tomorrow.</span>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
