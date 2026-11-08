@@ -33,29 +33,61 @@ const REVIEW_PROMPT_KEY = 'bf_google_review_prompt_shown';
     return;
   }
 
-  window.setTimeout(() => {
-    try {
-      localStorage.setItem(REVIEW_PROMPT_KEY, '1');
-    } catch (e) {
-      /* still show once this session if storage is blocked */
-    }
+  try {
+    localStorage.setItem(REVIEW_PROMPT_KEY, '1');
+  } catch (e) {
+    /* still show once this session if storage is blocked */
+  }
 
-    const toast = document.createElement('div');
-    toast.className = 'review-prompt';
-    toast.setAttribute('role', 'status');
-    toast.innerHTML =
-      '<p class="review-prompt-text">Support Our Mission ❤️ Rate us on Google.</p>' +
-      '<a class="review-prompt-link" href="' + GOOGLE_REVIEW_URL + '" target="_blank" rel="noopener noreferrer">Rate on Google</a>' +
-      '<button type="button" class="review-prompt-close" aria-label="Close">×</button>';
+  let selectedRating = 0;
 
-    const removeToast = () => {
-      toast.classList.add('is-hiding');
-      window.setTimeout(() => toast.remove(), 220);
-    };
+  const toast = document.createElement('div');
+  toast.className = 'review-prompt';
+  toast.setAttribute('role', 'dialog');
+  toast.setAttribute('aria-label', 'Rate your experience');
+  toast.innerHTML =
+    '<button type="button" class="review-prompt-close" aria-label="Close">×</button>' +
+    '<p class="review-prompt-text">Please rate your experience with our foundation.</p>' +
+    '<div class="review-prompt-stars" role="group" aria-label="Star rating"></div>' +
+    '<div class="review-prompt-actions">' +
+      '<button type="button" class="review-prompt-submit" disabled>Submit Rating</button>' +
+      '<button type="button" class="review-prompt-skip">Skip</button>' +
+    '</div>';
 
-    toast.querySelector('.review-prompt-close').addEventListener('click', removeToast);
-    document.body.appendChild(toast);
-    window.requestAnimationFrame(() => toast.classList.add('is-visible'));
-    window.setTimeout(removeToast, 5000);
-  }, 2000);
+  const starsWrap = toast.querySelector('.review-prompt-stars');
+  const submitBtn = toast.querySelector('.review-prompt-submit');
+
+  for (let i = 1; i <= 5; i += 1) {
+    const star = document.createElement('button');
+    star.type = 'button';
+    star.className = 'review-prompt-star';
+    star.setAttribute('aria-label', i + ' star' + (i === 1 ? '' : 's'));
+    star.dataset.value = String(i);
+    star.textContent = '★';
+    star.addEventListener('click', () => {
+      selectedRating = i;
+      starsWrap.querySelectorAll('.review-prompt-star').forEach((el) => {
+        const value = Number(el.dataset.value);
+        el.classList.toggle('is-selected', value <= selectedRating);
+      });
+      submitBtn.disabled = false;
+    });
+    starsWrap.appendChild(star);
+  }
+
+  const removeToast = () => {
+    toast.classList.add('is-hiding');
+    window.setTimeout(() => toast.remove(), 220);
+  };
+
+  toast.querySelector('.review-prompt-close').addEventListener('click', removeToast);
+  toast.querySelector('.review-prompt-skip').addEventListener('click', removeToast);
+  submitBtn.addEventListener('click', () => {
+    if (!selectedRating) return;
+    window.open(GOOGLE_REVIEW_URL, '_blank', 'noopener,noreferrer');
+    removeToast();
+  });
+
+  document.body.appendChild(toast);
+  window.requestAnimationFrame(() => toast.classList.add('is-visible'));
 })();
