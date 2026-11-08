@@ -22,11 +22,10 @@ if (form) form.addEventListener('submit', event => {
   window.location.href = `mailto:hello@example.org?subject=${subject}&body=${body}`;
 });
 
-/* Temporary Google Reviews prompt — change GOOGLE_REVIEW_URL as needed */
-const GOOGLE_REVIEW_URL = 'https://search.google.com/local/writereview?placeid=ChIJTw-cW0iR7TkRhWbYlYGm--w';
+/* One-time on-site rating prompt */
 const REVIEW_PROMPT_KEY = 'bf_google_review_prompt_shown';
 
-(function showGoogleReviewPrompt() {
+(function showRatingPrompt() {
   try {
     if (localStorage.getItem(REVIEW_PROMPT_KEY)) return;
   } catch (e) {
@@ -56,6 +55,8 @@ const REVIEW_PROMPT_KEY = 'bf_google_review_prompt_shown';
 
   const starsWrap = toast.querySelector('.review-prompt-stars');
   const submitBtn = toast.querySelector('.review-prompt-submit');
+  const message = toast.querySelector('.review-prompt-text');
+  const actions = toast.querySelector('.review-prompt-actions');
 
   for (let i = 1; i <= 5; i += 1) {
     const star = document.createElement('button');
@@ -84,8 +85,10 @@ const REVIEW_PROMPT_KEY = 'bf_google_review_prompt_shown';
   toast.querySelector('.review-prompt-skip').addEventListener('click', removeToast);
   submitBtn.addEventListener('click', () => {
     if (!selectedRating) return;
-    window.open(GOOGLE_REVIEW_URL, '_blank', 'noopener,noreferrer');
-    removeToast();
+    message.textContent = 'Thank you for your rating.';
+    starsWrap.remove();
+    actions.remove();
+    window.setTimeout(removeToast, 1600);
   });
 
   document.body.appendChild(toast);
