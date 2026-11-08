@@ -112,17 +112,6 @@ h1 em,h2 em{font-style:italic;font-weight:500;color:var(--orange)}
 .brand-footer .brand-mark{background:var(--navy)}
 .footer-main>p{font-size:13px;line-height:1.7;color:var(--muted);max-width:280px;margin:0}
 .footer-nav{display:flex;flex-wrap:wrap;gap:16px;justify-content:flex-end;font-size:12px;color:#4d5b70;font-weight:600}
-.footer-reviews{border-top:1px solid var(--line);padding:18px 0}
-.footer-reviews-inner{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;padding:14px 18px;border:1px solid var(--line);border-radius:14px;background:var(--white)}
-.footer-reviews-label{margin:0 0 4px;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--navy)}
-.footer-reviews-stars{color:#f5b400;font-size:16px;letter-spacing:2px;line-height:1;margin-bottom:4px}
-.footer-reviews-meta{margin:0;font-size:13px;color:var(--muted)}
-.footer-reviews-meta strong{color:var(--navy);font-weight:700}
-.footer-reviews-actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
-.footer-review-btn{display:inline-flex;align-items:center;background:var(--navy);color:#fff;font-size:12px;font-weight:700;padding:10px 14px;border-radius:999px}
-.footer-review-btn:hover{background:var(--orange)}
-.footer-maps-link{font-size:12px;font-weight:600;color:var(--navy);text-decoration:underline;text-underline-offset:2px}
-.footer-maps-link:hover{color:var(--orange)}
 .footer-bottom{border-top:1px solid var(--line);padding-top:16px;display:flex;justify-content:space-between;gap:12px;color:#8894a6;font-size:11px}
 
 .page-hero{background:linear-gradient(180deg,#f7f9fc 0%,#fff 100%);padding:88px 0 64px;border-bottom:1px solid var(--line)}
@@ -227,7 +216,6 @@ h1 em,h2 em{font-style:italic;font-weight:500;color:var(--orange)}
   .footer-main{grid-template-columns:1fr;gap:18px}
   .footer-nav{grid-column:auto;justify-content:flex-start}
   .footer-bottom{flex-direction:column}
-  .footer-reviews-inner{align-items:flex-start}
   .story-image{min-height:360px}
   .program-list article{grid-template-columns:42px 1fr 30px;gap:10px}
   .values-row{gap:18px;flex-wrap:wrap}
