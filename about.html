@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="About Bright Futures Foundation—our mission, free education programmes, activities, transparency approach and ways to get involved." />
   <meta name="theme-color" content="#0b1f3a" />
+  <!-- Optional: add a browser-restricted Google Maps Platform key to load live Place rating/review counts -->
+  <meta name="google-maps-api-key" content="" />
   <meta property="og:title" content="About Us | Bright Futures Foundation" />
   <meta property="og:description" content="Learn about our free education mission for underprivileged children and how you can take part." />
   <meta property="og:type" content="website" />
@@ -24,7 +26,7 @@
         <a href="index.html">Home</a>
         <a class="active" href="about.html">About</a>
         <a href="#programs">Programs</a>
-        <a href="#impact">Impact</a>
+        <a href="rating.html">Ratings</a>
         <a href="#contact">Contact</a>
         <a class="nav-cta" href="#get-involved">Get involved</a>
       </nav>
@@ -167,6 +169,36 @@
       </div>
     </section>
 
+    <section class="google-place-section section-pad" id="google-reviews" data-google-place>
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Google Business Profile</p>
+            <h2>EduFree on <em>Google Maps.</em></h2>
+          </div>
+          <p>Live rating details load from Google when available. We never invent stars or review counts.</p>
+        </div>
+        <div class="google-place-card">
+          <div class="google-place-summary">
+            <p class="google-place-name" data-place-name>EduFree</p>
+            <div class="google-place-rating" data-place-rating hidden>
+              <span class="google-place-score" data-place-score></span>
+              <span class="google-place-stars" data-place-stars aria-hidden="true"></span>
+              <span class="google-place-count" data-place-count></span>
+            </div>
+            <p class="google-place-status" data-place-status>Loading live Google rating…</p>
+            <div class="google-place-actions">
+              <a class="btn btn-primary" data-write-review href="https://search.google.com/local/writereview?placeid=ChIJTw-cW0iR7TkRhWbYlYGm--w" target="_blank" rel="noopener noreferrer">Write a Review</a>
+              <a class="text-link" data-maps-link href="https://www.google.com/maps/search/?api=1&query_place_id=ChIJTw-cW0iR7TkRhWbYlYGm--w" target="_blank" rel="noopener noreferrer">Open in Google Maps <span>→</span></a>
+            </div>
+          </div>
+          <div class="google-place-map">
+            <iframe title="EduFree on Google Maps" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen data-google-map src="https://www.google.com/maps?q=place_id:ChIJTw-cW0iR7TkRhWbYlYGm--w&z=15&output=embed"></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="involved-section section-pad" id="get-involved">
       <div class="container involved-grid">
         <div>
@@ -219,7 +251,7 @@
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
         <a href="#programs">Programs</a>
-        <a href="#transparency">Transparency</a>
+        <a href="rating.html">Ratings</a>
         <a href="#contact">Contact</a>
       </div>
     </div>
